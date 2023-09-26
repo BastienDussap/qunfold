@@ -290,3 +290,26 @@ class HDy(GenericMethod):
       ),
       **kwargs
     )
+
+class RFFM(GenericMethod):
+  """The RandomFourierFeaturesMatching method by Dussap et al. (2023).
+
+  This subclass of `GenericMethod` is instantiated with a `LeastSquaresLoss` and a `RandomFourierFeaturesTransformer`
+
+  Args:
+      sigma (float, optional): Value of the bandwidth. Defaults to 1.0.
+      n_features (int, optional): Number of RandomFourierFeatures used. Defaults to 1000.
+      seed (float, optional): Seed. Defaults to None.
+      **kwargs: Keyword arguments accepted by `GenericMethod`.
+  """
+  def __init__(self,  sigma=1.0, n_features=1000, seed=None, **kwargs):
+    GenericMethod.__init__(
+      self,
+      losses.LeastSquaresLoss(), 
+      transformers.RandomFourierFeaturesTransformer(
+        sigma=sigma,
+        n_features=n_features,
+        seed = seed
+      ), 
+      **kwargs
+      )
