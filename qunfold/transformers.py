@@ -152,3 +152,39 @@ class HistogramTransformer(AbstractTransformer):
     if self.unit_scale:
       fX = fX / fX.sum(axis=1, keepdims=True)
     return fX
+
+
+class RandomFourierFeaturesTransformer(AbstractTransformer):
+  """A MaximumMeanDiscrepancy-based transformer that uses the RandomFourierFeatures to speed up the computations.
+  Used in RFFM.
+
+  Args:
+      sigma (float, optional): Value of the bandwidth. Defaults to 1.0.
+      n_features (int, optional): Number of RandomFourierFeatures used. Defaults to 1000.
+      seed (float, optional): Seed. Defaults to None.
+  """
+
+  def __init__(self, sigma=1.0, n_features=1000, seed=None) -> None:
+    self.sigma = sigma
+    self.seed = seed
+    self.n_features = n_features
+
+  def fit_transform(self, X, y):
+    self.dim = X.shape[1]
+    rng = np.random.default_rng(seed=self.seed)
+    self.w = rng.normal(loc=0,
+                        scale=1./self.sigma,
+                        size=(int(self.n_features/2),
+                              self.dim))
+
+    Xw = X@self.w.T
+    fX = np.sqrt(2/self.n_features) * np.concatenate((np.cos(Xw),
+                                                      np.sin(Xw)), axis=1)  # shape = (n_points, n_features)
+
+    return fX, y
+
+  def transform(self, X):
+    Xw = X@self.w.T
+    C = np.concatenate((np.cos(Xw), np.sin(Xw)), axis=1)
+
+    return np.sqrt(2/self.n_features) * np.mean(C, axis=0) # shape = (n_features)
