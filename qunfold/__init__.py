@@ -13,6 +13,7 @@ from .transformers import (
     ClassTransformer,
     HistogramTransformer,
     DistanceTransformer,
+    RandomFourierFeaturesTransformer,
 )
 
 from .methods import (
@@ -24,4 +25,5 @@ from .methods import (
     HDy,
     EDx,
     EDy,
+    RFFM,
 )
