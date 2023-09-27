@@ -297,7 +297,7 @@ class RFFM(GenericMethod):
   This subclass of `GenericMethod` is instantiated with a `LeastSquaresLoss` and a `RandomFourierFeaturesTransformer`.
 
   Args:
-      sigma (optional): Value of the bandwidth.
+      sigma: Value of the bandwidth.
       n_features (optional): Number of RandomFourierFeatures used. Defaults to 1000.
       seed (optional): Seed. Defaults to None.
       **kwargs: Keyword arguments accepted by `GenericMethod`.
