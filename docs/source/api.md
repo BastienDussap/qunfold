@@ -34,6 +34,8 @@ We categorize existing, well-known quantification and unfolding algorithms into 
 .. autoclass:: qunfold.HDx
 
 .. autoclass:: qunfold.HDy
+
+.. autoclass:: qunfold.RFFM
 ```
 
 
@@ -80,6 +82,8 @@ You can use the `CombinedLoss` to create arbitrary, weighted sums of losses and 
 .. autoclass:: qunfold.DistanceTransformer
 
 .. autoclass:: qunfold.HistogramTransformer
+
+.. autoclass:: qunfold.RandomFourierFeaturesTransformer
 ```
 
 

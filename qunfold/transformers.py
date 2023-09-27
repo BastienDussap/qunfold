@@ -155,16 +155,16 @@ class HistogramTransformer(AbstractTransformer):
 
 
 class RandomFourierFeaturesTransformer(AbstractTransformer):
-  """A MaximumMeanDiscrepancy-based transformer that uses the RandomFourierFeatures to speed up the computations.
+  """A MaximumMeanDiscrepancy-based transformer that uses `Random Fourier Features` to speed up computations.
   Used in RFFM.
 
   Args:
-      sigma (float, optional): Value of the bandwidth. Defaults to 1.0.
-      n_features (int, optional): Number of RandomFourierFeatures used. Defaults to 1000.
-      seed (float, optional): Seed. Defaults to None.
+      sigma: Value of the bandwidth.
+      n_features (optional): Number of RandomFourierFeatures used. Defaults to 1000.
+      seed (optional): Seed. Defaults to None.
   """
 
-  def __init__(self, sigma=1.0, n_features=1000, seed=None) -> None:
+  def __init__(self, sigma, n_features=1000, seed=None) -> None:
     self.sigma = sigma
     self.seed = seed
     self.n_features = n_features
